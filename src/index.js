@@ -22,10 +22,10 @@ function renderMovie(movie) {
 fetch(filmsAPI)
     .then(response => response.json())
     .then(data => {
-        updateMovieList(data);
+       renderMovieList(data);
       })
 
-    function updateMovieList(films) {
+    function renderMovieList(films) {
     const movieList = document.getElementById('films');
     movieList.innerHTML = ''; 
       
