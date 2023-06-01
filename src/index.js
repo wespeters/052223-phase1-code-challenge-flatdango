@@ -2,10 +2,8 @@ const filmsAPI = "http://localhost:3000/films"
 
 //Get and render first movie details
 fetch(`${filmsAPI}/1`)
-    .then(response => response.json())
-    .then(data => {
-      renderMovie(data);
-    })
+    .then(res => res.json())
+    .then(renderMovie)
 
 function renderMovie(movie) {
     const availableTickets = movie.capacity - movie.tickets_sold;
@@ -20,28 +18,28 @@ function renderMovie(movie) {
 
 //Get and show menu of all movies on the left side of the page
 fetch(filmsAPI)
-    .then(response => response.json())
-    .then(data => {
-       renderMovieList(data);
-      })
+    .then(res => res.json())
+    .then(renderMovieList)
 
-    function renderMovieList(films) {
-    const movieList = document.getElementById('films');
-    movieList.innerHTML = ''; 
+function renderMovieList(films) {
+const movieList = document.getElementById('films');
+movieList.innerHTML = ''; 
       
-    films.forEach(film => {
-        const listItem = document.createElement('li');
-        listItem.className = 'film item';
-        listItem.textContent = film.title;
-        movieList.appendChild(listItem);
-        });
-      }
+films.forEach(film => {
+    const listItem = document.createElement('li');
+    listItem.className = 'film item';
+    listItem.textContent = film.title;
+    movieList.appendChild(listItem);
+    });
+}
 
 //Buy a ticket
-document.getElementById('buy-ticket').addEventListener('click', function() {
+document.getElementById('buy-ticket').addEventListener('click', buyTicket) 
+
+function buyTicket () {
     const remainingTickets = document.getElementById('ticket-num').textContent;
-    if (remainingTickets > 0) {
+    if (remainingTickets > '0') {
       document.getElementById('ticket-num').textContent = remainingTickets - 1;
-    } else {document.getElementById('ticket-num').textContent = 0
+    } else {document.getElementById('ticket-num').textContent = '0'
     }
-  });
+  };
